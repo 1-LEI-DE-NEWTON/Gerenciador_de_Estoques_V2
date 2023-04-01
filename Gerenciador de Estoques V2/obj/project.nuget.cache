@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GUzPRbS8bTsLwPNwTPIjutT6xnMMUA4nPlkN+26P1xS/hDLsT5IofbllA27Izd618HPlDL7g/9EBiqsxzBn7/A==",
+  "dgSpecHash": "H58N6v01lrz+dBpCvJtBKAXEki92fpDJeLiTyDOFCcwy+4cJK0IUkA1Ko0uTbPsFTBY81l8WZSFm/+55lhTUCw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\TKFir\\Source\\Repos\\Gerenciador_de_Estoques_V2\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2.csproj",
+  "projectFilePath": "C:\\Users\\TKFir\\source\\repos\\Gerenciador_de_Estoques_V2\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TKFir\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\TKFir\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",
