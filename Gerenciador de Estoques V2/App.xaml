@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Gerenciador_de_Estoques_V2"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
         <Style x:Key="Estilo_Placeholder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -16,11 +17,14 @@
                                  x:Name="Texto" 
                                  Background="Transparent" 
                                  Panel.ZIndex="2" />
+                            
                             <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
                                 <TextBox.Style>
+                                    
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Foreground" Value="Transparent"/>
                                         <Style.Triggers>
+                                            
                                             <DataTrigger Binding="{Binding Path=Text, Source={x:Reference Texto}}" Value="">
                                                 <Setter Property="Foreground" Value="LightGray"/>
                                             </DataTrigger>
