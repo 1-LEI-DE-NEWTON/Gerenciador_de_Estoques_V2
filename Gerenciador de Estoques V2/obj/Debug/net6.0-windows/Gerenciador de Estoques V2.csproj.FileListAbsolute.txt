@@ -1,0 +1,48 @@
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Gerenciador de Estoques V2.exe
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Gerenciador de Estoques V2.deps.json
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Gerenciador de Estoques V2.runtimeconfig.json
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Gerenciador de Estoques V2.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Gerenciador de Estoques V2.pdb
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.csproj.AssemblyReference.cache
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2_MarkupCompile.cache
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2_MarkupCompile.lref
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\App.baml
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.g.resources
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.AssemblyInfoInputs.cache
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.AssemblyInfo.cs
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.csproj.CoreCompileInputs.cache
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\refint\Gerenciador de Estoques V2.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.pdb
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.genruntimeconfig.cache
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\ref\Gerenciador de Estoques V2.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Google.Protobuf.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\K4os.Compression.LZ4.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\K4os.Hash.xxHash.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\MySql.Data.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\MySqlConnector.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\runtimes\win-x64\native\comerr64.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\runtimes\win-x64\native\gssapi64.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\runtimes\win-x64\native\krb5_64.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\runtimes\win-x64\native\krbcc64.dll
+C:\Users\TKFir\source\repos\Gerenciador de Estoques V2\Gerenciador de Estoques V2\obj\Debug\net6.0-windows\Gerenciador de Estoques V2.csproj.CopyComplete
