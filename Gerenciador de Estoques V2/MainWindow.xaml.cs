@@ -37,12 +37,6 @@ namespace Gerenciador_de_Estoques_V2
 
         private void AdicionarProduto_Click(object sender, RoutedEventArgs e)
         {
-            string nome = txtNomeProduto.Text;
-            string quantidade = txtQuantidadeProduto.Text;
-            string preco = txtPrecoProduto.Text;
-
-            //altera a visbilidade dos campos de texto
-
             foreach (string campo in camposBemVindo)
             {
                 FrameworkElement elemento = FindName(campo) as FrameworkElement;
@@ -59,10 +53,7 @@ namespace Gerenciador_de_Estoques_V2
                 {
                     elemento.Visibility = Visibility.Visible;
                 }
-            }   
-            
-            //Produto produto = new Produto(nome, quantidade, preco);
-
+            }                           
         }
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
@@ -71,15 +62,24 @@ namespace Gerenciador_de_Estoques_V2
         }
 
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
-        {
-            //Adiciona o produto na lista de produtos
+        {            
             var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
-                (decimal)double.Parse(txtPrecoProduto.Text));
-            //models.AdicionarProduto(produto);
-            //Adiciona o produto ao banco de dados
-            ProdutoDAO.AdicionarProduto(produto);
-            //Limpa os campos
+                (decimal)double.Parse(txtPrecoProduto.Text));                        
+            ProdutoDAO.AdicionarProduto(produto);            
             txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";
         }
+
+        private void Filtrar_Click(object sender, RoutedEventArgs e)
+        {
+            string nome = txtPesquisarProdutoNome.Text;
+        }
+
+        private void EditarProduto_Click(object sender, RoutedEventArgs e)
+        {
+            string nome = txtPesquisarProdutoNome.Text;
+        }
+        
+        private void ExcluirProduto_Click(object sender, RoutedEventArgs e)
+        { }
     }
 }

@@ -2174,11 +2174,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TKFir\\source\\repos\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2.csproj",
+      "projectUniqueName": "C:\\Users\\TKFir\\Source\\Repos\\Gerenciador_de_Estoques_V2\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2.csproj",
       "projectName": "Gerenciador de Estoques V2",
-      "projectPath": "C:\\Users\\TKFir\\source\\repos\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2.csproj",
+      "projectPath": "C:\\Users\\TKFir\\Source\\Repos\\Gerenciador_de_Estoques_V2\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2.csproj",
       "packagesPath": "C:\\Users\\TKFir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TKFir\\source\\repos\\Gerenciador de Estoques V2\\Gerenciador de Estoques V2\\obj\\",
+      "outputPath": "C:\\Users\\TKFir\\Source\\Repos\\Gerenciador_de_Estoques_V2\\Gerenciador de Estoques V2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
