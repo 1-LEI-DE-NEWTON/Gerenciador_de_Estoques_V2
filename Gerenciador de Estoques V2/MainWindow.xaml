@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gerenciador_de_Estoques_V2"
         mc:Ignorable="d"
-        Title="TelaVitu" Height="483" Width="837"
+        Title="TelaVitu" Height="483" Width="841"
         Background="#F7F8F9"
         Foreground="#333"
         >
@@ -184,7 +184,7 @@
                     FontFamily="roboto" FontSize="14" Foreground="#333" Visibility="Visible"
                     RenderTransformOrigin="0.5,0.755" FontWeight="Bold" Margin="18,0,0,0"/>
 
-            <ComboBox x:Name="cbxFiltro" Height="20" Width="58" Margin="10,-25,590,0" SelectionChanged="Filtrar_Click">
+            <ComboBox x:Name="cbxFiltro" Height="20" Width="62" Margin="10,-25,590,0" SelectionChanged="Filtrar_Click">
                 <ComboBoxItem Content="Nome do Produto"/>
                 <ComboBoxItem Content="Quantidade"/>
                 <ComboBoxItem Content="Preço"/>
@@ -215,7 +215,7 @@
             </Button>
         </StackPanel>
 
-        <ListView Grid.Row="2" x:Name="lvwProdutos" FontSize="18" Grid.ColumnSpan="2">
+        <ListView Grid.Row="2" x:Name="lvwProdutos" FontSize="18" Grid.ColumnSpan="2" SelectionChanged="lvwProdutos_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nome" Width="200" DisplayMemberBinding="{Binding Nome}"/>
