@@ -117,7 +117,7 @@
 
         <Border VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="28,11,0,0" Grid.Row="1" x:Name="borderAddProduct" 
                 BorderBrush="#ddd" BorderThickness="1" CornerRadius="5" Height="65" Width="760"
-                HorizontalAlignment="Left" Visibility="Visible" Grid.RowSpan="2">
+                HorizontalAlignment="Left" Visibility="Hidden" Grid.RowSpan="2">
 
             <Border.Effect>
                 <DropShadowEffect/>
@@ -127,7 +127,7 @@
 
         <Border BorderThickness="1" BorderBrush="#ddd" VerticalAlignment="Top" x:Name="txtAddProduct"
                 Grid.ColumnSpan="2" Margin="28,11,49,0" Grid.Row="1" Height="65"
-                Background="#fff" CornerRadius="5" Visibility="Visible" Grid.RowSpan="2">
+                Background="#fff" CornerRadius="5" Visibility="Hidden" Grid.RowSpan="2">
 
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
@@ -137,7 +137,7 @@
                     RenderTransformOrigin="0.5,0.755" FontWeight="Bold"/>
 
                     <TextBox x:Name="txtNomeProduto" Margin="6,0,0,0" Grid.Row="1" Height="19"
-                     FontFamily="roboto" FontSize="11" Foreground="#333" Visibility="Visible" Width="157"
+                     FontFamily="roboto" FontSize="11" Foreground="#333" Visibility="Hidden" Width="157"
                      Style="{StaticResource Estilo_Placeholder}" Tag="Nome do Produto"/>
 
                 </StackPanel>
@@ -193,13 +193,28 @@
             </StackPanel>
         </Border>
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Label Content="Filtrar por:" x:Name="lblFiltrar"
                     FontFamily="roboto" FontSize="14" Foreground="#333" Visibility="Visible"
                     RenderTransformOrigin="0.5,0.755" FontWeight="Bold" Margin="18,0,0,0"/>
+            
+            <Button x:Name="btnDesejoFiltrar" Background="#333" Cursor="Hand" FontWeight="Bold"
+                    Click="DesejoFiltrar_Click" Height="25" Width="168" Visibility="Visible"
+                    Margin="-680,1,0,0">
 
-            <ComboBox x:Name="cbxFiltro" Height="20" Width="62" Margin="10,-25,590,0" SelectionChanged="Filtrar_Click">
-                <ComboBoxItem Content="Nome do Produto"/>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+
+                <TextBlock Text="Eu desejo filtrar minha lista" Margin="0,-3,0,0" Foreground="#fff"/>
+
+            </Button>
+
+            <ComboBox x:Name="cbxFiltro" Height="20" Width="62" Margin="10,-75,590,0" SelectionChanged="Filtrar_Click"
+                      Visibility="Visible">
+                <ComboBoxItem Content="Nome"/>
                 <ComboBoxItem Content="Quantidade"/>
                 <ComboBoxItem Content="Preço"/>
             </ComboBox>
@@ -216,7 +231,7 @@
                      Tag=""/>
 
             <Button x:Name="btnFiltrar" Background="#333" Cursor="Hand" FontWeight="Bold"
-                    Click="Filtrar_Click" Height="20" Width="98" Margin="10,-25,-145,0">
+                    Click="Filtrar_Click" Height="20" Width="98" Margin="10,-25,-145,0" Visibility="Hidden">
 
                 <TextBlock Text="Listar Produtos" Margin="0,-3,0,0" Foreground="#fff"/>
 
@@ -227,9 +242,10 @@
                 </Button.Resources>
 
             </Button>
+
         </StackPanel>
 
-        <ListView Grid.Row="2" x:Name="lvwProdutos" FontSize="18" Grid.ColumnSpan="2" Visibility="Hidden">
+        <ListView Grid.Row="2" x:Name="lvwProdutos" FontSize="18" Grid.ColumnSpan="2" Visibility="Visible">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nome" Width="200" DisplayMemberBinding="{Binding Nome}"/>

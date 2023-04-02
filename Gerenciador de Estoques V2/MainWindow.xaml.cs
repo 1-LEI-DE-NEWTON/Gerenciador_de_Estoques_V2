@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Gerenciador_de_Estoques_V2
@@ -20,7 +21,8 @@ namespace Gerenciador_de_Estoques_V2
         
         private readonly List<string> camposBemVindo = new List<string> { "borderWelcome", "txtWelcome", "txtWelcome2" };
 
-        private readonly List<string> camposListarProduto = new List<string> { "lblFiltrar", "cbxFiltro", "btnFiltrar", "lvwProdutos" };
+        private readonly List<string> camposListarProduto = new List<string> { "lblFiltrar", "cbxFiltro", "btnFiltrar",
+            "lvwProdutos", "btnDesejoFiltrar" };
 
         #endregion
             //private Models models;                
@@ -64,7 +66,7 @@ namespace Gerenciador_de_Estoques_V2
             //torna todos os campos exceto o ListarProduto invisiveis
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Hidden);
-            SetVisibility(camposListarProduto, Visibility.Visible);            
+            SetVisibility(camposListarProduto, Visibility.Visible);
             
             PreencherListView();
         }
@@ -106,36 +108,23 @@ namespace Gerenciador_de_Estoques_V2
             TelaInicial();
         }
 
-        #endregion
-        #region TELA LISTAR PRODUTOS
-        private void PreencherListView()
-        {
-            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutos());
-            lvwProdutos.ItemsSource = Produtos;
-        }
-
-        private void Filtrar_Click(object sender, RoutedEventArgs e)
-        {
-            string nome = txtPesquisarProdutoNome.Text;
-        }
-
         private void EditarProduto_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (lvwProdutos.SelectedItem != null)
             {
                 produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
                 EditarProdutos(produtoSelecionado);
-                
+
                 PreencherListView();
             }
-             
+
             else
             {
                 MessageBox.Show("Selecione um produto para editar!");
-            }                                     
+            }
         }
-        
+
         private void ExcluirProduto_Click(object sender, RoutedEventArgs e)
         {
             if (lvwProdutos.SelectedItem != null)
@@ -151,19 +140,110 @@ namespace Gerenciador_de_Estoques_V2
                     ProdutoDAO.RemoverProduto(produtoSelecionado);
                     PreencherListView();
                 }
-                
+
                 else
                 {
                     MessageBox.Show("Operação cancelada!", "Excluir Produto");
                 }
             }
-            
+
             else
             {
                 MessageBox.Show("Selecione um produto para remover!");
             }
         }
+
+        private void DesejoFiltrar_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem cbxFiltroEscolhido = (ComboBoxItem)cbxFiltro.SelectedItem;
+            string filtroEscolhido = cbxFiltroEscolhido.Content.ToString();
+
+            switch (filtroEscolhido)
+            {
+                case "Nome":
+                    txtFiltro.Visibility = Visibility.Visible;
+                    txtMinimo.Visibility = Visibility.Collapsed;
+                    txtMaximo.Visibility = Visibility.Collapsed;
+
+                    break;
+                case "Preço":
+                    txtFiltro.Visibility = Visibility.Collapsed;
+                    txtMinimo.Visibility = Visibility.Visible;
+                    txtMaximo.Visibility = Visibility.Visible;
+                    txtMinimo.Tag = "Preço Mínimo";
+                    txtMaximo.Tag = "Preço Máximo";
+                    break;
+                case "Quantidade":
+                    txtFiltro.Visibility = Visibility.Collapsed;
+                    txtMinimo.Visibility = Visibility.Visible;
+                    txtMaximo.Visibility = Visibility.Visible;
+                    txtMinimo.Tag = "Quantidade Mínima";
+                    txtMaximo.Tag = "Quantidade Máxima";
+                    break;
+            }
+        }
+
+        private void Filtrar_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem cbxFiltroEscolhido = (ComboBoxItem)cbxFiltro.SelectedItem;
+            string filtroEscolhido = cbxFiltroEscolhido.Content.ToString();
+
+            if (txtFiltro.Text != "" || txtMaximo.Text != "" || txtMinimo.Text != "")
+            {
+                switch (filtroEscolhido)
+                {
+                    case "Preço":
+                        if (decimal.TryParse(txtMinimo.Text, out decimal precoMinimo) &&
+                            decimal.TryParse(txtMaximo.Text, out decimal precoMax))
+                        {
+                            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                                new FiltroPreco(precoMinimo, precoMax)));
+                            lvwProdutos.ItemsSource = Produtos;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Digite um valor válido!", "Filtro por Preço",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+
+                    case "Quantidade":
+                        if (int.TryParse(txtMinimo.Text, out int qntMinima) &&
+                            (int.TryParse(txtMaximo.Text, out int qntMax)))
+                        {
+                            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                                new FiltroPreco(qntMinima, qntMax)));
+                            lvwProdutos.ItemsSource = Produtos;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Digite um valor válido!", "Filtro por Quantidade",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+
+                    case "Nome":
+                        txtFiltro.Visibility = Visibility.Visible;
+                        Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                            new FiltroPorNome(txtFiltro.Text)));
+                        lvwProdutos.ItemsSource = Produtos;
+                        break;
+                }
+            }
+            else
+            {
+                lvwProdutos.ItemsSource = Produtos;
+            }
+        }
+
         #endregion
+
+        private void PreencherListView()
+        {
+            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutos());
+            lvwProdutos.ItemsSource = Produtos;
+        }
+    
         private void SetVisibility(IEnumerable<string> campos, Visibility visibility)
         {
             foreach (string campo in campos)
