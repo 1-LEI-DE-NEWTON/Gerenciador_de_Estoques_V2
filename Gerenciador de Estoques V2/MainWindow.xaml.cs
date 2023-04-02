@@ -19,8 +19,10 @@ namespace Gerenciador_de_Estoques_V2
         
         private readonly List<string> camposBemVindo = new List<string> { "borderWelcome", "txtWelcome", "txtWelcome2" };
 
+        private readonly List<string> camposListarProduto = new List<string> { "lblFiltrar", "cbxFiltro", "btnFiltrar", "lvwProdutos" };
+
         #endregion
-        //private Models models;                
+            //private Models models;                
         public ObservableCollection<Produto> Produtos { get; set; }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -63,9 +65,25 @@ namespace Gerenciador_de_Estoques_V2
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
         {
+            foreach (string campo in camposBemVindo)
+            {
+                FrameworkElement elemento = FindName(campo) as FrameworkElement;
+                if (elemento != null)
+                {
+                    elemento.Visibility = Visibility.Hidden;
+                }
+            }
+            
+            foreach (string campo in camposListarProduto)
+            {
+                FrameworkElement elemento = FindName(campo) as FrameworkElement;
+                if (elemento != null)
+                {
+                    elemento.Visibility = Visibility.Visible;
+                }
+            }
+            
             PreencherListView();
-            //alterar visibilidade
-            string nome = txtPesquisarProdutoNome.Text;
         }
         #endregion
 

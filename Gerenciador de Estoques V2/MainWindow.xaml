@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gerenciador_de_Estoques_V2"
         mc:Ignorable="d"
-        Title="TelaVitu" Height="486" Width="858"
+        Title="TelaVitu" Height="508" Width="858"
         Background="#F7F8F9"
         Foreground="#333"
         >
