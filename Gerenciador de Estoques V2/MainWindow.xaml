@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gerenciador_de_Estoques_V2"
         mc:Ignorable="d"
-        Title="TelaVitu" Height="508" Width="858"
+        Title="TelaVitu" Height="508" Width="863"
         Background="#F7F8F9"
         Foreground="#333"
         >
@@ -231,7 +231,7 @@
                      Tag=""/>
 
             <Button x:Name="btnFiltrar" Background="#333" Cursor="Hand" FontWeight="Bold"
-                    Click="Filtrar_Click" Height="20" Width="98" Margin="10,-25,-145,0" Visibility="Hidden">
+                    Click="Filtrar_Click" Height="20" Width="98" Margin="10,-25,-145,0" Visibility="Visible">
 
                 <TextBlock Text="Listar Produtos" Margin="0,-3,0,0" Foreground="#fff"/>
 
