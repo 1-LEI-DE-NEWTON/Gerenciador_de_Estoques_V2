@@ -53,9 +53,29 @@ namespace Gerenciador_de_Estoques_V2
         }
         private void Buscar_Click(object sender, RoutedEventArgs e)
         {
-            //alterar visbilidade
-            string nome = txtPesquisarProdutoNome.Text;
-        }
+            var produto = ProdutoDAO.BuscarProdutoPorNome(txtPesquisarProdutoNome.Text);
+            
+            if (produto != null)
+            {
+                MessageBoxResult resultado = MessageBox.Show("Produto encontrado! Clique em Sim para editar ou Nao " +
+                    "para visualizar todos os produtos com esse nome",
+                    "Produto encontrado", MessageBoxButton.YesNoCancel);
+
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    EditarProdutos(produto);                    
+                }
+                else if (resultado == MessageBoxResult.No)
+                {
+                    ListarProdutosComBuscar(produto);                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("Produto não encontrado!", "Produto não encontrado",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }    
 
         private void AdicionarProduto_Click(object sender, RoutedEventArgs e)
         {
@@ -74,6 +94,16 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposListarProduto, Visibility.Visible);
             
             PreencherListView();
+        }
+        
+        private void ListarProdutosComBuscar(Produto produto)
+        {
+            SetVisibility(camposBemVindo, Visibility.Hidden);
+            SetVisibility(camposAdicionarProduto, Visibility.Hidden);
+            SetVisibility(camposListarProduto, Visibility.Visible);
+            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                            new FiltroPorNome(produto.Nome)));
+            lvwProdutos.ItemsSource = Produtos;
         }
 
         private void EditarProdutos(Produto produtoSelecionado)
@@ -121,8 +151,6 @@ namespace Gerenciador_de_Estoques_V2
             {
                 produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
                 EditarProdutos(produtoSelecionado);
-
-                PreencherListView();
             }
 
             else
