@@ -65,11 +65,13 @@ namespace Gerenciador_de_Estoques_V2
                 {
                     EditarProdutos(produto);                    
                 }
+                
                 else if (resultado == MessageBoxResult.No)
                 {
                     ListarProdutosComBuscar(produto);                    
                 }
             }
+            
             else
             {
                 MessageBox.Show("Produto não encontrado!", "Produto não encontrado",
@@ -84,6 +86,7 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposListarProduto, Visibility.Hidden);
             btnSalvarProduto.Visibility = Visibility.Visible;
+            btnSalvarProdutoEditado.Visibility = Visibility.Hidden;
         }
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
@@ -114,6 +117,7 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposListarProduto, Visibility.Hidden);
             btnSalvarProdutoEditado.Visibility = Visibility.Visible;
+            btnSalvarProduto.Visibility = Visibility.Hidden;
 
             produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
             txtNomeProduto.Tag = produtoSelecionado.Nome.ToString();            
@@ -126,21 +130,55 @@ namespace Gerenciador_de_Estoques_V2
 
         #region BOTOES DAS TELAS
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
-        {            
-            var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
-                (decimal)double.Parse(txtPrecoProduto.Text));                        
-            ProdutoDAO.AdicionarProduto(produto);            
-            txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";
+        {
+            //verifica se os campos nao estao vazios
+            if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
+            {
+                //verifica se o produto ja existe
+                if (ProdutoDAO.BuscarProdutoPorNome(txtNomeProduto.Text) == null)
+                {
+                    var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
+                        (decimal)double.Parse(txtPrecoProduto.Text));
+                    ProdutoDAO.AdicionarProduto(produto);                    
+                    txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";
+                    
+                    MessageBox.Show("Produto adicionado com sucesso!", "Produto adicionado",
+                        MessageBoxButton.OK, MessageBoxImage.Information);                    
+                }
+                else
+                {
+                    MessageBox.Show("Produto já existe!", "Produto já existe",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
         
         private void btnSalvarProdutoEditado_Click(object sender, RoutedEventArgs e)
         {
-            produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
-            produtoSelecionado.Nome = txtNomeProduto.Text;
-            produtoSelecionado.Quantidade = int.Parse(txtQuantidadeProduto.Text);
-            produtoSelecionado.Preco = (decimal)double.Parse(txtPrecoProduto.Text);
-            //Salva as alterações no banco de dados
-            ProdutoDAO.EditarProduto(produtoSelecionado);
+
+            if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
+            {
+                produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
+                produtoSelecionado.Nome = txtNomeProduto.Text;
+                produtoSelecionado.Quantidade = int.Parse(txtQuantidadeProduto.Text);
+                produtoSelecionado.Preco = (decimal)double.Parse(txtPrecoProduto.Text);
+
+                
+                ProdutoDAO.EditarProduto(produtoSelecionado);
+                txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+                       
             TelaInicial();
         }
 
@@ -243,6 +281,7 @@ namespace Gerenciador_de_Estoques_V2
                                 new FiltroPreco(precoMinimo, precoMax)));
                             lvwProdutos.ItemsSource = Produtos;
                         }
+                        
                         else
                         {
                             MessageBox.Show("Digite um valor válido!", "Filtro por Preço",
@@ -258,6 +297,7 @@ namespace Gerenciador_de_Estoques_V2
                                 new FiltroPreco(qntMinima, qntMax)));
                             lvwProdutos.ItemsSource = Produtos;
                         }
+                        
                         else
                         {
                             MessageBox.Show("Digite um valor válido!", "Filtro por Quantidade",
@@ -273,6 +313,7 @@ namespace Gerenciador_de_Estoques_V2
                         break;
                 }
             }
+            
             else
             {
                 lvwProdutos.ItemsSource = Produtos;

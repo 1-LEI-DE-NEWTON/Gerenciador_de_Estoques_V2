@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gerenciador_de_Estoques_V2"
         mc:Ignorable="d"
-        Title="TelaVitu" Height="508" Width="863"
+        Title="Gerenciador de Estoque" Height="508" Width="863"
         Background="#F7F8F9"
         Foreground="#333"
         >
@@ -250,7 +250,7 @@
                 <GridView>
                     <GridViewColumn Header="Nome" Width="200" DisplayMemberBinding="{Binding Nome}"/>
                     <GridViewColumn Header="Quantidade" Width="150" DisplayMemberBinding="{Binding Quantidade}"/>
-                    <GridViewColumn Header="Preço" Width="150" DisplayMemberBinding="{Binding Preco}"/>
+                    <GridViewColumn Header="Preço Unitário" Width="150" DisplayMemberBinding="{Binding Preco}"/>
                     <GridViewColumn Header="Opções" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
