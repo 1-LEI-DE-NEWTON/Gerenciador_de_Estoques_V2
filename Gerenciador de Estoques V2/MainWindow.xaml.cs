@@ -38,6 +38,13 @@ namespace Gerenciador_de_Estoques_V2
         }
 
         #region TELAS       
+        
+        private void TelaInicial()
+        {
+            SetVisibility(camposListarProduto, Visibility.Hidden);
+            SetVisibility(camposAdicionarProduto, Visibility.Hidden);
+            SetVisibility(camposBemVindo, Visibility.Visible);
+        }
         private void Buscar_Click(object sender, RoutedEventArgs e)
         {
             //alterar visbilidade
@@ -70,6 +77,9 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposListarProduto, Visibility.Hidden);
             btnSalvarProdutoEditado.Visibility = Visibility.Visible;
 
+            produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
+            txtNomeProduto.Tag = produtoSelecionado.Nome.ToString();            
+
             Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
                 new FiltroPorNome(produtoSelecionado.Nome)));
             lvwProdutos.ItemsSource = Produtos;
@@ -87,7 +97,13 @@ namespace Gerenciador_de_Estoques_V2
         
         private void btnSalvarProdutoEditado_Click(object sender, RoutedEventArgs e)
         {
-            
+            produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
+            produtoSelecionado.Nome = txtNomeProduto.Text;
+            produtoSelecionado.Quantidade = int.Parse(txtQuantidadeProduto.Text);
+            produtoSelecionado.Preco = (decimal)double.Parse(txtPrecoProduto.Text);
+            //Salva as alterações no banco de dados
+            ProdutoDAO.EditarProduto(produtoSelecionado);
+            TelaInicial();
         }
 
         #endregion
@@ -106,7 +122,7 @@ namespace Gerenciador_de_Estoques_V2
         private void EditarProduto_Click(object sender, RoutedEventArgs e)
         {
             
-             if (lvwProdutos.SelectedItem != null)
+            if (lvwProdutos.SelectedItem != null)
             {
                 produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
                 EditarProdutos(produtoSelecionado);
