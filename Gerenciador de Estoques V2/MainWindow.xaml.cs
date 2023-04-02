@@ -173,7 +173,8 @@ namespace Gerenciador_de_Estoques_V2
                 MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
-                       
+
+            txtNomeProduto.Tag = "Nome do Produto";
             TelaInicial();
         }
 
