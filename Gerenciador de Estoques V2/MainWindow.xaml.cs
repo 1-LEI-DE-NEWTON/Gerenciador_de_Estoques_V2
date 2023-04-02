@@ -156,31 +156,40 @@ namespace Gerenciador_de_Estoques_V2
         private void DesejoFiltrar_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxItem cbxFiltroEscolhido = (ComboBoxItem)cbxFiltro.SelectedItem;
-            string filtroEscolhido = cbxFiltroEscolhido.Content.ToString();
-
-            switch (filtroEscolhido)
+            if (cbxFiltroEscolhido != null)
             {
-                case "Nome":
-                    txtFiltro.Visibility = Visibility.Visible;
-                    txtMinimo.Visibility = Visibility.Collapsed;
-                    txtMaximo.Visibility = Visibility.Collapsed;
+                string filtroEscolhido = cbxFiltroEscolhido.Content.ToString();
 
-                    break;
-                case "Preço":
-                    txtFiltro.Visibility = Visibility.Collapsed;
-                    txtMinimo.Visibility = Visibility.Visible;
-                    txtMaximo.Visibility = Visibility.Visible;
-                    txtMinimo.Tag = "Preço Mínimo";
-                    txtMaximo.Tag = "Preço Máximo";
-                    break;
-                case "Quantidade":
-                    txtFiltro.Visibility = Visibility.Collapsed;
-                    txtMinimo.Visibility = Visibility.Visible;
-                    txtMaximo.Visibility = Visibility.Visible;
-                    txtMinimo.Tag = "Quantidade Mínima";
-                    txtMaximo.Tag = "Quantidade Máxima";
-                    break;
+                switch (filtroEscolhido)
+                {
+                    case "Nome":
+                        txtFiltro.Visibility = Visibility.Visible;
+                        txtMinimo.Visibility = Visibility.Collapsed;
+                        txtMaximo.Visibility = Visibility.Collapsed;
+
+                        break;
+                    case "Preço":
+                        txtFiltro.Visibility = Visibility.Collapsed;
+                        txtMinimo.Visibility = Visibility.Visible;
+                        txtMaximo.Visibility = Visibility.Visible;
+                        txtMinimo.Tag = "Preço Mínimo";
+                        txtMaximo.Tag = "Preço Máximo";
+                        break;
+                    case "Quantidade":
+                        txtFiltro.Visibility = Visibility.Collapsed;
+                        txtMinimo.Visibility = Visibility.Visible;
+                        txtMaximo.Visibility = Visibility.Visible;
+                        txtMinimo.Tag = "Quantidade Mínima";
+                        txtMaximo.Tag = "Quantidade Máxima";
+                        break;
+                }
             }
+
+            else
+            {
+                MessageBox.Show("Selecione um Filtro!");
+            }
+            
         }
 
         private void Filtrar_Click(object sender, RoutedEventArgs e)
