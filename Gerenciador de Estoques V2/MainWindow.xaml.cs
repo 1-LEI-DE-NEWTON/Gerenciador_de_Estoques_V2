@@ -28,7 +28,7 @@ namespace Gerenciador_de_Estoques_V2
         private readonly List<string> camposFiltrosListarProdutos = new List<string> { "txtFiltro", "txtMinimo", "txtMaximo" };
 
         #endregion
-            //private Models models;                
+        
         public ObservableCollection<Produto> Produtos { get; set; }
         private Produto produtoSelecionado;
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
