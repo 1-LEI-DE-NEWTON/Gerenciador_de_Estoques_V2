@@ -1,4 +1,5 @@
 ﻿using Gerenciador_de_Estoques_V2.Domain.Models;
+using GerenciadorDeEstoque.Filtros;
 using Sistema_de_Gerenciamento_de_Estoques.Infra.DAO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,7 +48,7 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposListarProduto, Visibility.Hidden);
-                              
+            btnSalvarProduto.Visibility = Visibility.Visible;
         }
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
@@ -55,8 +56,8 @@ namespace Gerenciador_de_Estoques_V2
             //torna todos os campos exceto o ListarProduto invisiveis
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Hidden);
-            SetVisibility(camposListarProduto, Visibility.Visible);
-                        
+            SetVisibility(camposListarProduto, Visibility.Visible);            
+            
             PreencherListView();
         }
 
@@ -64,11 +65,17 @@ namespace Gerenciador_de_Estoques_V2
         {
             //torna todos os campos exceto o EditarProduto invisiveis
             SetVisibility(camposBemVindo, Visibility.Hidden);
-            SetVisibility(camposAdicionarProduto, Visibility.Hidden);
+            SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposListarProduto, Visibility.Hidden);
+            btnSalvarProdutoEditado.Visibility = Visibility.Visible;
+
+            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                new FiltroPorNome(produtoSelecionado.Nome)));
+            lvwProdutos.ItemsSource = Produtos;
         }
         #endregion
 
+        #region BOTOES DAS TELAS
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
         {            
             var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
@@ -76,7 +83,13 @@ namespace Gerenciador_de_Estoques_V2
             ProdutoDAO.AdicionarProduto(produto);            
             txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";
         }
+        
+        private void btnSalvarProdutoEditado_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
+        #endregion
         #region TELA LISTAR PRODUTOS
         private void PreencherListView()
         {
@@ -91,21 +104,19 @@ namespace Gerenciador_de_Estoques_V2
 
         private void EditarProduto_Click(object sender, RoutedEventArgs e)
         {
-            /*
+            
              if (lvwProdutos.SelectedItem != null)
             {
                 var produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
-                var janela = new EditarProdutos(produtoSelecionado);
-                janela.ShowDialog();
+                EditarProdutos(produtoSelecionado);
+                
                 PreencherListView();
             }
+             
             else
             {
                 MessageBox.Show("Selecione um produto para editar!");
-            }             
-            */
-            
-            string nome = txtPesquisarProdutoNome.Text;
+            }                                     
         }
         
         private void ExcluirProduto_Click(object sender, RoutedEventArgs e)
@@ -123,11 +134,13 @@ namespace Gerenciador_de_Estoques_V2
                     ProdutoDAO.RemoverProduto(produtoSelecionado);
                     PreencherListView();
                 }
+                
                 else
                 {
                     MessageBox.Show("Operação cancelada!", "Excluir Produto");
                 }
             }
+            
             else
             {
                 MessageBox.Show("Selecione um produto para remover!");
