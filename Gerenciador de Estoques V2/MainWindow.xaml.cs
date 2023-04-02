@@ -66,7 +66,6 @@ namespace Gerenciador_de_Estoques_V2
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
         {
-            //torna todos os campos exceto o ListarProduto invisiveis
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Hidden);
             SetVisibility(camposListarProduto, Visibility.Visible);
@@ -86,7 +85,6 @@ namespace Gerenciador_de_Estoques_V2
 
         private void EditarProdutos(Produto produtoSelecionado)
         {
-            //torna todos os campos exceto o EditarProduto invisiveis
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
@@ -177,7 +175,7 @@ namespace Gerenciador_de_Estoques_V2
             }
 
             txtNomeProduto.Tag = "Nome do Produto";
-            TelaInicial();
+            ListarProdutos_Click(sender, e);
         }
 
         private void EditarProduto_Click(object sender, RoutedEventArgs e)
