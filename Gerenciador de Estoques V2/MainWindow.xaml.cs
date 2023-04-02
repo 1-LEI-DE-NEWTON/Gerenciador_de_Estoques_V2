@@ -140,14 +140,11 @@ namespace Gerenciador_de_Estoques_V2
                     var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
                         (decimal)double.Parse(txtPrecoProduto.Text));
                     ProdutoDAO.AdicionarProduto(produto);                    
-                    txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";
-                    
-                    MessageBox.Show("Produto adicionado com sucesso!", "Produto adicionado",
-                        MessageBoxButton.OK, MessageBoxImage.Information);                    
+                    txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";                                       
                 }
                 else
                 {
-                    MessageBox.Show("Produto já existe!", "Produto já existe",
+                    MessageBox.Show("Já existe um produto com este nome", "Produto já existe!",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
