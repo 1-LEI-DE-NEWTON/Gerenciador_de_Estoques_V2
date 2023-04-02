@@ -131,10 +131,8 @@ namespace Gerenciador_de_Estoques_V2
         #region BOTOES DAS TELAS
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
         {
-            //verifica se os campos nao estao vazios
             if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
             {
-                //verifica se o produto ja existe
                 if (ProdutoDAO.BuscarProdutoPorNome(txtNomeProduto.Text) == null)
                 {
                     var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
