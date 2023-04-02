@@ -93,7 +93,7 @@
 
         <Border VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="18,11,0,0" Grid.Row="1" x:Name="borderWelcome" 
                 BorderBrush="#ddd" BorderThickness="1" CornerRadius="5" Height="48" Width="800"
-                HorizontalAlignment="Left" Visibility="Hidden">
+                HorizontalAlignment="Left" Visibility="Visible">
             <Border.Effect>
                 <DropShadowEffect/>
             </Border.Effect>
@@ -101,28 +101,28 @@
 
         <Border BorderThickness="1" BorderBrush="#ddd" VerticalAlignment="Top" x:Name="txtWelcome"
                  Grid.ColumnSpan="2" Margin="18,11,19,0" Grid.Row="1" Height="48"
-                Background="#fff" CornerRadius="5" Visibility="Hidden">
-            
+                Background="#fff" CornerRadius="5" Visibility="Visible">
+
             <TextBlock                       
                    Background="#fff" HorizontalAlignment="Left" Margin="9,5,0,22" Height="19" Width="370"
                    Foreground="#333" FontFamily="roboto" FontSize="20" FontWeight="Bold">
                 <Run Text="BEM"/><Run Language="pt-br" Text="-"/><Run Text="VINDO AO SISTEMA DE ESTOQUE"/>
             </TextBlock>
-            
+
         </Border>
 
         <TextBlock Text="Aqui você pode gerenciar seus produtos e manter seu estoque organizado." 
-                   Margin="29,4,83,241" Grid.Row="2" x:Name="txtWelcome2"
-                   FontFamily="roboto" FontSize="11" Foreground="#333" Visibility="Hidden"/>
+                   Margin="28,41,84,5" Grid.Row="1" x:Name="txtWelcome2"
+                   FontFamily="roboto" FontSize="11" Foreground="#333" Visibility="Visible"/>
 
         <Border VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="28,11,0,0" Grid.Row="1" x:Name="borderAddProduct" 
                 BorderBrush="#ddd" BorderThickness="1" CornerRadius="5" Height="65" Width="760"
                 HorizontalAlignment="Left" Visibility="Hidden" Grid.RowSpan="2">
-            
+
             <Border.Effect>
                 <DropShadowEffect/>
             </Border.Effect>
-            
+
         </Border>
 
         <Border BorderThickness="1" BorderBrush="#ddd" VerticalAlignment="Top" x:Name="txtAddProduct"
@@ -139,7 +139,7 @@
                     <TextBox x:Name="txtNomeProduto" Margin="6,0,0,0" Grid.Row="1" Height="19"
                      FontFamily="roboto" FontSize="11" Foreground="#333" Visibility="Visible" Width="157"
                      Style="{StaticResource Estilo_Placeholder}" Tag="Nome do Produto"/>
-                    
+
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Width="124">
@@ -231,7 +231,7 @@
 
                                     <Button Content="Excluir" Margin="5" Background="#333"
                                             Foreground="#fff" FontSize="14" Click="ExcluirProduto_Click"/>
-                                    
+
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
