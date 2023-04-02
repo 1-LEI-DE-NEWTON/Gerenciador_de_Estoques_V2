@@ -44,45 +44,19 @@ namespace Gerenciador_de_Estoques_V2
 
         private void AdicionarProduto_Click(object sender, RoutedEventArgs e)
         {
-            foreach (string campo in camposBemVindo)
-            {
-                FrameworkElement elemento = FindName(campo) as FrameworkElement;
-                if (elemento != null)
-                {
-                    elemento.Visibility = Visibility.Hidden;
-                }
-            }
-
-            foreach (string campo in camposAdicionarProduto)
-            {
-                FrameworkElement elemento = FindName(campo) as FrameworkElement;
-                if (elemento != null)
-                {
-                    elemento.Visibility = Visibility.Visible;
-                }
-            }                           
+            SetVisibility(camposAdicionarProduto, Visibility.Visible);
+            SetVisibility(camposBemVindo, Visibility.Hidden);
+            SetVisibility(camposListarProduto, Visibility.Hidden);
+                              
         }
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
         {
-            foreach (string campo in camposBemVindo)
-            {
-                FrameworkElement elemento = FindName(campo) as FrameworkElement;
-                if (elemento != null)
-                {
-                    elemento.Visibility = Visibility.Hidden;
-                }
-            }
-            
-            foreach (string campo in camposListarProduto)
-            {
-                FrameworkElement elemento = FindName(campo) as FrameworkElement;
-                if (elemento != null)
-                {
-                    elemento.Visibility = Visibility.Visible;
-                }
-            }
-            
+            //torna todos os campos exceto o ListarProduto invisiveis
+            SetVisibility(camposBemVindo, Visibility.Hidden);
+            SetVisibility(camposAdicionarProduto, Visibility.Hidden);
+            SetVisibility(camposListarProduto, Visibility.Visible);
+                        
             PreencherListView();
         }
         #endregion
@@ -152,5 +126,13 @@ namespace Gerenciador_de_Estoques_V2
             }
         }
         #endregion
+        private void SetVisibility(IEnumerable<string> campos, Visibility visibility)
+        {
+            foreach (string campo in campos)
+            {
+                FrameworkElement elemento = FindName(campo) as FrameworkElement;
+                elemento?.Dispatcher.Invoke(() => elemento.Visibility = visibility);
+            }
+        }
     }
 }
