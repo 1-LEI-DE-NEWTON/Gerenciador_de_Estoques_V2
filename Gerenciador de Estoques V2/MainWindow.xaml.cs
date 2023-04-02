@@ -21,8 +21,11 @@ namespace Gerenciador_de_Estoques_V2
         
         private readonly List<string> camposBemVindo = new List<string> { "borderWelcome", "txtWelcome", "txtWelcome2" };
 
+        
         private readonly List<string> camposListarProduto = new List<string> { "lblFiltrar", "cbxFiltro", "btnFiltrar",
             "lvwProdutos", "btnDesejoFiltrar" };
+
+        private readonly List<string> camposFiltrosListarProdutos = new List<string> { "txtFiltro", "txtMinimo", "txtMaximo" };
 
         #endregion
             //private Models models;                
@@ -45,6 +48,7 @@ namespace Gerenciador_de_Estoques_V2
         {
             SetVisibility(camposListarProduto, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Hidden);
+            SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposBemVindo, Visibility.Visible);
         }
         private void Buscar_Click(object sender, RoutedEventArgs e)
@@ -57,6 +61,7 @@ namespace Gerenciador_de_Estoques_V2
         {
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposBemVindo, Visibility.Hidden);
+            SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposListarProduto, Visibility.Hidden);
             btnSalvarProduto.Visibility = Visibility.Visible;
         }
@@ -75,6 +80,7 @@ namespace Gerenciador_de_Estoques_V2
         {
             //torna todos os campos exceto o EditarProduto invisiveis
             SetVisibility(camposBemVindo, Visibility.Hidden);
+            SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposListarProduto, Visibility.Hidden);
             btnSalvarProdutoEditado.Visibility = Visibility.Visible;
