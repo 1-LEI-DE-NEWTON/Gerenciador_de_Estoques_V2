@@ -30,7 +30,9 @@ namespace Gerenciador_de_Estoques_V2
         #endregion
         
         public ObservableCollection<Produto> Produtos { get; set; }
+        
         private Produto produtoSelecionado;
+        
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -50,34 +52,7 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposAdicionarProduto, Visibility.Hidden);
             SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposBemVindo, Visibility.Visible);
-        }
-        private void Buscar_Click(object sender, RoutedEventArgs e)
-        {
-            var produto = ProdutoDAO.BuscarProdutoPorNome(txtPesquisarProdutoNome.Text);
-            
-            if (produto != null)
-            {
-                MessageBoxResult resultado = MessageBox.Show("Produto encontrado! Clique em Sim para editar ou Nao " +
-                    "para visualizar todos os produtos com esse nome",
-                    "Produto encontrado", MessageBoxButton.YesNoCancel);
-
-                if (resultado == MessageBoxResult.Yes)
-                {
-                    EditarProdutos(produto);                    
-                }
-                
-                else if (resultado == MessageBoxResult.No)
-                {
-                    ListarProdutosComBuscar(produto);                    
-                }
-            }
-            
-            else
-            {
-                MessageBox.Show("Produto não encontrado!", "Produto não encontrado",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }    
+        }         
 
         private void AdicionarProduto_Click(object sender, RoutedEventArgs e)
         {
@@ -129,6 +104,33 @@ namespace Gerenciador_de_Estoques_V2
         #endregion
 
         #region BOTOES DAS TELAS
+        private void Buscar_Click(object sender, RoutedEventArgs e)
+        {
+            produtoSelecionado = ProdutoDAO.BuscarProdutoPorNome(txtPesquisarProdutoNome.Text);
+
+            if (produtoSelecionado != null)
+            {
+                MessageBoxResult resultado = MessageBox.Show("Produto encontrado! Clique em Sim para editar ou Nao " +
+                    "para visualizar todos os produtos com esse nome",
+                    "Produto encontrado", MessageBoxButton.YesNoCancel);
+
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    EditarProdutos(produtoSelecionado);
+                }
+
+                else if (resultado == MessageBoxResult.No)
+                {
+                    ListarProdutosComBuscar(produtoSelecionado);
+                }
+            }
+
+            else
+            {
+                MessageBox.Show("Produto não encontrado!", "Produto não encontrado",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
         {
             if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
