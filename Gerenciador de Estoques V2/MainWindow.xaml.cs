@@ -21,7 +21,7 @@ namespace Gerenciador_de_Estoques_V2
 
         #endregion
         //private Models models;                
-
+        public ObservableCollection<Produto> Produtos { get; set; }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -63,6 +63,7 @@ namespace Gerenciador_de_Estoques_V2
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
         {
+            PreencherListView();
             //alterar visibilidade
             string nome = txtPesquisarProdutoNome.Text;
         }
@@ -90,11 +91,48 @@ namespace Gerenciador_de_Estoques_V2
 
         private void EditarProduto_Click(object sender, RoutedEventArgs e)
         {
+            /*
+             if (lvwProdutos.SelectedItem != null)
+            {
+                var produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
+                var janela = new EditorProdutos(produtoSelecionado);
+                janela.ShowDialog();
+                PreencherListView();
+            }
+            else
+            {
+                MessageBox.Show("Selecione um produto para editar!");
+            } 
+            */
+            
             string nome = txtPesquisarProdutoNome.Text;
         }
         
         private void ExcluirProduto_Click(object sender, RoutedEventArgs e)
-        { }
+        {
+            if (lvwProdutos.SelectedItem != null)
+            {
+                var produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
+                produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
+
+                MessageBoxResult resultado = MessageBox.Show("Deseja excluir o produto " + produtoSelecionado.Nome
+                    + "?", "Excluir Produto", MessageBoxButton.YesNo);
+
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    ProdutoDAO.RemoverProduto(produtoSelecionado);
+                    PreencherListView();
+                }
+                else
+                {
+                    MessageBox.Show("Operação cancelada!", "Excluir Produto");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um produto para remover!");
+            }
+        }
         #endregion
     }
 }
