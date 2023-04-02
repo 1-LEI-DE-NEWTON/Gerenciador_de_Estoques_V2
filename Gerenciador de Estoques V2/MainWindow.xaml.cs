@@ -25,6 +25,7 @@ namespace Gerenciador_de_Estoques_V2
         #endregion
             //private Models models;                
         public ObservableCollection<Produto> Produtos { get; set; }
+        private Produto produtoSelecionado;
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -107,7 +108,7 @@ namespace Gerenciador_de_Estoques_V2
             
              if (lvwProdutos.SelectedItem != null)
             {
-                var produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
+                produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
                 EditarProdutos(produtoSelecionado);
                 
                 PreencherListView();
@@ -123,7 +124,7 @@ namespace Gerenciador_de_Estoques_V2
         {
             if (lvwProdutos.SelectedItem != null)
             {
-                var produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
+                produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
                 produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
 
                 MessageBoxResult resultado = MessageBox.Show("Deseja excluir o produto " + produtoSelecionado.Nome
