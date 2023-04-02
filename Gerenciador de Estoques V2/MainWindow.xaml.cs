@@ -59,6 +59,14 @@ namespace Gerenciador_de_Estoques_V2
                         
             PreencherListView();
         }
+
+        private void EditarProdutos(Produto produtoSelecionado)
+        {
+            //torna todos os campos exceto o EditarProduto invisiveis
+            SetVisibility(camposBemVindo, Visibility.Hidden);
+            SetVisibility(camposAdicionarProduto, Visibility.Hidden);
+            SetVisibility(camposListarProduto, Visibility.Hidden);
+        }
         #endregion
 
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
@@ -87,14 +95,14 @@ namespace Gerenciador_de_Estoques_V2
              if (lvwProdutos.SelectedItem != null)
             {
                 var produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
-                var janela = new EditorProdutos(produtoSelecionado);
+                var janela = new EditarProdutos(produtoSelecionado);
                 janela.ShowDialog();
                 PreencherListView();
             }
             else
             {
                 MessageBox.Show("Selecione um produto para editar!");
-            } 
+            }             
             */
             
             string nome = txtPesquisarProdutoNome.Text;
