@@ -63,6 +63,7 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposListarProduto, Visibility.Hidden);
             btnSalvarProduto.Visibility = Visibility.Visible;
             btnSalvarProdutoEditado.Visibility = Visibility.Hidden;
+            txtNomeProduto.Tag = "Nome do produto";
         }
 
         private void ListarProdutos_Click(object sender, RoutedEventArgs e)
