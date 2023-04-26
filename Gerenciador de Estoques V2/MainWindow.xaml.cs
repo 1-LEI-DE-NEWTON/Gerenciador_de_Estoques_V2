@@ -275,7 +275,8 @@ namespace Gerenciador_de_Estoques_V2
                         {
                             Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
                                 new FiltroPreco(precoMinimo, precoMax)));
-                            lvwProdutos.ItemsSource = Produtos;
+                            txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
+                            lvwProdutos.ItemsSource = Produtos;                                                        
                         }
                         
                         else
@@ -291,6 +292,7 @@ namespace Gerenciador_de_Estoques_V2
                         {
                             Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
                                 new FiltroPreco(qntMinima, qntMax)));
+                            txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
                             lvwProdutos.ItemsSource = Produtos;
                         }
                         
@@ -305,6 +307,7 @@ namespace Gerenciador_de_Estoques_V2
                         txtFiltro.Visibility = Visibility.Visible;
                         Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
                             new FiltroPorNome(txtFiltro.Text)));
+                        txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
                         lvwProdutos.ItemsSource = Produtos;
                         break;
                 }
