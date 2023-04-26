@@ -185,6 +185,7 @@ namespace Gerenciador_de_Estoques_V2
             {
                 produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
                 EditarProdutos(produtoSelecionado);
+                PreencherListView();
             }
 
             else
