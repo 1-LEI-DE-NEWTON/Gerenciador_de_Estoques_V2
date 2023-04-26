@@ -20,7 +20,6 @@ namespace Gerenciador_de_Estoques_V2
             "txtPrecoProduto","lblNomeProduto", "lblQuantidadeProduto", "lblPrecoProduto", "borderAddProduct", "txtAddProduct" };
         
         private readonly List<string> camposBemVindo = new List<string> { "borderWelcome", "txtWelcome", "txtWelcome2" };
-
         
         private readonly List<string> camposListarProduto = new List<string> { "lblFiltrar", "cbxFiltro", "btnFiltrar",
             "lvwProdutos", "btnDesejoFiltrar" };
@@ -55,7 +54,7 @@ namespace Gerenciador_de_Estoques_V2
         }         
 
         private void AdicionarProduto_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposBemVindo, Visibility.Hidden);
@@ -80,18 +79,22 @@ namespace Gerenciador_de_Estoques_V2
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Hidden);
             SetVisibility(camposListarProduto, Visibility.Visible);
+            
             Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
                             new FiltroPorNome(produto.Nome)));
+            
             lvwProdutos.ItemsSource = Produtos;
         }
 
         private void EditarProdutos(Produto produtoSelecionado)
-        {            
+        {
             CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);
+            
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposListarProduto, Visibility.Hidden);
+            
             btnSalvarProdutoEditado.Visibility = Visibility.Visible;
             btnSalvarProduto.Visibility = Visibility.Hidden;
 
@@ -119,13 +122,11 @@ namespace Gerenciador_de_Estoques_V2
                 {
                     EditarProdutos(produtoSelecionado);
                 }
-
                 else if (resultado == MessageBoxResult.No)
                 {
                     ListarProdutosComBuscar(produtoSelecionado);
                 }
             }
-
             else
             {
                 MessageBox.Show("Produto não encontrado!", "Produto não encontrado",
@@ -140,8 +141,8 @@ namespace Gerenciador_de_Estoques_V2
                 {
                     var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
                         (decimal)double.Parse(txtPrecoProduto.Text));
-                    ProdutoDAO.AdicionarProduto(produto);                    
-                    txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";                                       
+                    ProdutoDAO.AdicionarProduto(produto);
+                    CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);                    
                 }
                 else
                 {
@@ -169,28 +170,24 @@ namespace Gerenciador_de_Estoques_V2
 
                 
                 ProdutoDAO.EditarProduto(produtoSelecionado);
-                txtNomeProduto.Text = ""; txtQuantidadeProduto.Text = ""; txtPrecoProduto.Text = "";
+                CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);                
             }
             else
             {
                 MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            txtNomeProduto.Tag = "Nome do Produto";
+            }    
             ListarProdutos_Click(sender, e);
         }
 
         private void EditarProduto_Click(object sender, RoutedEventArgs e)
         {
-
             if (lvwProdutos.SelectedItem != null)
             {
                 produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
                 EditarProdutos(produtoSelecionado);
                 PreencherListView();
             }
-
             else
             {
                 MessageBox.Show("Selecione um produto para editar!");
@@ -212,13 +209,11 @@ namespace Gerenciador_de_Estoques_V2
                     ProdutoDAO.RemoverProduto(produtoSelecionado);
                     PreencherListView();
                 }
-
                 else
                 {
                     MessageBox.Show("Operação cancelada!", "Excluir Produto");
                 }
             }
-
             else
             {
                 MessageBox.Show("Selecione um produto para remover!");
@@ -256,12 +251,10 @@ namespace Gerenciador_de_Estoques_V2
                         break;
                 }
             }
-
             else
             {
                 MessageBox.Show("Selecione um Filtro!");
-            }
-            
+            }            
         }
 
         private void Filtrar_Click(object sender, RoutedEventArgs e)
@@ -281,8 +274,7 @@ namespace Gerenciador_de_Estoques_V2
                                 new FiltroPreco(precoMinimo, precoMax)));
                             txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
                             lvwProdutos.ItemsSource = Produtos;                                                        
-                        }
-                        
+                        }                        
                         else
                         {
                             MessageBox.Show("Digite um valor válido!", "Filtro por Preço",
@@ -298,8 +290,7 @@ namespace Gerenciador_de_Estoques_V2
                                 new FiltroPreco(qntMinima, qntMax)));
                             txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
                             lvwProdutos.ItemsSource = Produtos;
-                        }
-                        
+                        }                        
                         else
                         {
                             MessageBox.Show("Digite um valor válido!", "Filtro por Quantidade",
@@ -315,8 +306,7 @@ namespace Gerenciador_de_Estoques_V2
                         lvwProdutos.ItemsSource = Produtos;
                         break;
                 }
-            }
-            
+            }            
             else
             {
                 lvwProdutos.ItemsSource = Produtos;
@@ -340,7 +330,7 @@ namespace Gerenciador_de_Estoques_V2
             }
         }
 
-        private void CleanFields(params TextBox[] campos)
+        private static void CleanFields(params TextBox[] campos)
         {
             foreach (TextBox campo in campos)
             {
