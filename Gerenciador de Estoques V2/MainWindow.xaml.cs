@@ -55,7 +55,8 @@ namespace Gerenciador_de_Estoques_V2
         }         
 
         private void AdicionarProduto_Click(object sender, RoutedEventArgs e)
-        {
+        {            
+            CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
@@ -84,7 +85,8 @@ namespace Gerenciador_de_Estoques_V2
         }
 
         private void EditarProdutos(Produto produtoSelecionado)
-        {
+        {            
+            CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposFiltrosListarProdutos, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Visible);
@@ -336,5 +338,13 @@ namespace Gerenciador_de_Estoques_V2
                 elemento?.Dispatcher.Invoke(() => elemento.Visibility = visibility);
             }
         }
+
+        private void CleanFields(params TextBox[] campos)
+        {
+            foreach (TextBox campo in campos)
+            {
+                campo.Text = "";
+            }
+        }       
     }
 }
