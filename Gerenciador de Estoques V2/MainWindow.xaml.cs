@@ -1,4 +1,5 @@
 ﻿using Gerenciador_de_Estoques_V2.Domain.Models;
+using Gerenciador_de_Estoques_V2.Infra;
 using GerenciadorDeEstoque.Filtros;
 using Sistema_de_Gerenciamento_de_Estoques.Infra.DAO;
 using System.Collections.Generic;
@@ -135,24 +136,32 @@ namespace Gerenciador_de_Estoques_V2
         }
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
         {
-            if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
+            if (SqlHandler.TestConnection() == true)
             {
-                if (ProdutoDAO.BuscarProdutoPorNome(txtNomeProduto.Text) == null)
+                if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
                 {
-                    var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
-                        (decimal)double.Parse(txtPrecoProduto.Text));
-                    ProdutoDAO.AdicionarProduto(produto);
-                    CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);                    
+                    if (ProdutoDAO.BuscarProdutoPorNome(txtNomeProduto.Text) == null)
+                    {
+                        var produto = new Produto(txtNomeProduto.Text, int.Parse(txtQuantidadeProduto.Text),
+                            (decimal)double.Parse(txtPrecoProduto.Text));
+                        ProdutoDAO.AdicionarProduto(produto);
+                        CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Já existe um produto com este nome", "Produto já existe!",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Já existe um produto com este nome", "Produto já existe!",
+                    MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
+                MessageBox.Show("O banco de dados parece estar inacessível.", "Erro ao salvar produto",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -257,13 +266,13 @@ namespace Gerenciador_de_Estoques_V2
 
         private void Filtrar_Click(object sender, RoutedEventArgs e)
         {
-            ComboBoxItem cbxFiltroEscolhido = (ComboBoxItem)cbxFiltro.SelectedItem;            
-            
+            ComboBoxItem cbxFiltroEscolhido = (ComboBoxItem)cbxFiltro.SelectedItem;
+
             if (cbxFiltroEscolhido != null)
             {
                 string filtroEscolhido = cbxFiltroEscolhido.Content.ToString();
-                
-                try
+
+                if (SqlHandler.TestConnection() == true)
                 {
                     if (txtFiltro.Text != "" || txtMaximo.Text != "" || txtMinimo.Text != "")
                     {
@@ -312,44 +321,34 @@ namespace Gerenciador_de_Estoques_V2
                     }
                     else
                     {
-                        try
-                        {
-                            lvwProdutos.ItemsSource = Produtos;
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Não foi possível conectar ao banco de dados!", "Erro de Conexão",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+                        lvwProdutos.ItemsSource = Produtos;
                     }
                 }
-                catch (System.Exception)
+                else
                 {
-                    MessageBox.Show("Não foi possível conectar ao banco de dados!", "Erro de Conexão",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("O banco de dados não retornou nenhum produto.", "Erro ao listar produtos",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
                 MessageBox.Show("Selecione um Filtro!");
-            }
-            
-            
+            }            
         }
-            #endregion
+        #endregion
 
         private void PreencherListView()
         {
-            try
+            if (SqlHandler.TestConnection() == true)
             {
                 Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutos());
                 lvwProdutos.ItemsSource = Produtos;
             }
-            catch (System.Exception)
+            else
             {
                 MessageBox.Show("O banco de dados não retornou nenhum produto.", "Erro ao listar produtos",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-            }  
+            } 
         }
     
         private void SetVisibility(IEnumerable<string> campos, Visibility visibility)
