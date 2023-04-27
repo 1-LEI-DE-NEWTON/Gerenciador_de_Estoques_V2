@@ -257,65 +257,89 @@ namespace Gerenciador_de_Estoques_V2
 
         private void Filtrar_Click(object sender, RoutedEventArgs e)
         {
-            ComboBoxItem cbxFiltroEscolhido = (ComboBoxItem)cbxFiltro.SelectedItem;
-            string filtroEscolhido = cbxFiltroEscolhido.Content.ToString();
-
-            if (txtFiltro.Text != "" || txtMaximo.Text != "" || txtMinimo.Text != "")
+            ComboBoxItem cbxFiltroEscolhido = (ComboBoxItem)cbxFiltro.SelectedItem;            
+            
+            if (cbxFiltroEscolhido != null)
             {
-                switch (filtroEscolhido)
+                string filtroEscolhido = cbxFiltroEscolhido.Content.ToString();
+                
+                try
                 {
-                    case "Preço":
-                        if (decimal.TryParse(txtMinimo.Text, out decimal precoMinimo) &&
-                            decimal.TryParse(txtMaximo.Text, out decimal precoMax))
+                    if (txtFiltro.Text != "" || txtMaximo.Text != "" || txtMinimo.Text != "")
+                    {
+                        switch (filtroEscolhido)
                         {
-                            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
-                                new FiltroPreco(precoMinimo, precoMax)));
-                            txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
-                            lvwProdutos.ItemsSource = Produtos;                                                        
-                        }                        
-                        else
-                        {
-                            MessageBox.Show("Digite um valor válido!", "Filtro por Preço",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        break;
+                            case "Preço":
+                                if (decimal.TryParse(txtMinimo.Text, out decimal precoMinimo) &&
+                                    decimal.TryParse(txtMaximo.Text, out decimal precoMax))
+                                {
+                                    Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                                        new FiltroPreco(precoMinimo, precoMax)));
+                                    txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
+                                    lvwProdutos.ItemsSource = Produtos;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Digite um valor válido!", "Filtro por Preço",
+                                        MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                                break;
 
-                    case "Quantidade":
-                        if (int.TryParse(txtMinimo.Text, out int qntMinima) &&
-                            (int.TryParse(txtMaximo.Text, out int qntMax)))
+                            case "Quantidade":
+                                if (int.TryParse(txtMinimo.Text, out int qntMinima) &&
+                                    (int.TryParse(txtMaximo.Text, out int qntMax)))
+                                {
+                                    Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                                        new FiltroPreco(qntMinima, qntMax)));
+                                    txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
+                                    lvwProdutos.ItemsSource = Produtos;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Digite um valor válido!", "Filtro por Quantidade",
+                                        MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                                break;
+
+                            case "Nome":
+                                txtFiltro.Visibility = Visibility.Visible;
+                                Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
+                                    new FiltroPorNome(txtFiltro.Text)));
+                                txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
+                                lvwProdutos.ItemsSource = Produtos;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        try
                         {
-                            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
-                                new FiltroPreco(qntMinima, qntMax)));
-                            txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
                             lvwProdutos.ItemsSource = Produtos;
-                        }                        
-                        else
+                        }
+                        catch
                         {
-                            MessageBox.Show("Digite um valor válido!", "Filtro por Quantidade",
+                            MessageBox.Show("Não foi possível conectar ao banco de dados!", "Erro de Conexão",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        break;
-
-                    case "Nome":
-                        txtFiltro.Visibility = Visibility.Visible;
-                        Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutosComFiltro(
-                            new FiltroPorNome(txtFiltro.Text)));
-                        txtFiltro.Text = ""; txtMinimo.Text = ""; txtMaximo.Text = "";
-                        lvwProdutos.ItemsSource = Produtos;
-                        break;
+                    }
                 }
-            }            
+                catch (System.Exception)
+                {
+                    MessageBox.Show("Não foi possível conectar ao banco de dados!", "Erro de Conexão",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
             else
             {
-                lvwProdutos.ItemsSource = Produtos;
+                MessageBox.Show("Selecione um Filtro!");
             }
+            
+            
         }
-
-        #endregion
+            #endregion
 
         private void PreencherListView()
         {
-            //Cria um try catch para caso o banco de dados esteja offline
             try
             {
                 Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutos());
