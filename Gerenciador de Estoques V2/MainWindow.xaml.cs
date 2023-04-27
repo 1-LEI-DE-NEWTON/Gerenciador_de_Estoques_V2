@@ -155,12 +155,10 @@ namespace Gerenciador_de_Estoques_V2
                 MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
         
         private void btnSalvarProdutoEditado_Click(object sender, RoutedEventArgs e)
         {
-
             if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
             {
                 produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
@@ -317,8 +315,17 @@ namespace Gerenciador_de_Estoques_V2
 
         private void PreencherListView()
         {
-            Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutos());
-            lvwProdutos.ItemsSource = Produtos;
+            //Cria um try catch para caso o banco de dados esteja offline
+            try
+            {
+                Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutos());
+                lvwProdutos.ItemsSource = Produtos;
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("O banco de dados não retornou nenhum produto.", "Erro ao listar produtos",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }  
         }
     
         private void SetVisibility(IEnumerable<string> campos, Visibility visibility)

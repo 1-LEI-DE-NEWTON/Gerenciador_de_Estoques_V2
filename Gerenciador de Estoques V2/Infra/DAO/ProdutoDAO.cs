@@ -7,9 +7,11 @@ using GerenciadorDeEstoque.Filtros;
 using MySql.Data.MySqlClient;
 
 namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
-{
+{    
     public class ProdutoDAO
     {
+        private static readonly string erroDeConexao = "Não foi possível se conectar a nenhum banco de dados MySql especificado.";
+            
         private static readonly string connectionString = "server=localhost;database=gerenciadorDeEstoque;uid=root;";
 
         public static List<Produto> ListarProdutos()
@@ -38,10 +40,10 @@ namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
                 }
                 return produtos;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erro ao listar produtos: " + ex.Message, "Erro",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(erroDeConexao,
+                    "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -73,10 +75,10 @@ namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
 
                 return filtro.Aplicar(produtos.AsQueryable()).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erro ao listar produtos: " + ex.Message, "Erro",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(erroDeConexao,
+                    "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -98,10 +100,10 @@ namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
                     MessageBox.Show("Produto adicionado com sucesso!", "Adicionar Produto");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erro ao adicionar produto: " + ex.Message, "Erro",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(erroDeConexao,
+                    "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);                
             }
         }
 
@@ -124,11 +126,10 @@ namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erro ao editar produto: " + ex.Message, "Erro",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(erroDeConexao,
+                    "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);                
             }
         }
 
@@ -157,11 +158,10 @@ namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
                     return produto;
                 }
             }
-            
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erro ao buscar produto: " + ex.Message, "Erro",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(erroDeConexao,
+                    "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -191,11 +191,10 @@ namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
                     return null;
                 }
             }
-            
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erro ao buscar produto: " + ex.Message, "Erro",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(erroDeConexao,
+                    "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -216,11 +215,10 @@ namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erro ao remover produto: " + ex.Message, "Erro",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(erroDeConexao,
+                    "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
