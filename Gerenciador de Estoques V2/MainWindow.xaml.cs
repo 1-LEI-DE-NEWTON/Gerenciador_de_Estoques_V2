@@ -113,26 +113,29 @@ namespace Gerenciador_de_Estoques_V2
         {
             produtoSelecionado = ProdutoDAO.BuscarProdutoPorNome(txtPesquisarProdutoNome.Text);
 
-            if (produtoSelecionado != null)
+            if (SqlHandler.TestConnection() == true)
             {
-                MessageBoxResult resultado = MessageBox.Show("Produto encontrado! Clique em Sim para editar ou Nao " +
-                    "para visualizar todos os produtos com esse nome",
-                    "Produto encontrado", MessageBoxButton.YesNoCancel);
+                if (produtoSelecionado != null)
+                {
+                    MessageBoxResult resultado = MessageBox.Show("Produto encontrado! Clique em Sim para editar ou Nao " +
+                        "para visualizar todos os produtos com esse nome",
+                        "Produto encontrado", MessageBoxButton.YesNoCancel);
 
-                if (resultado == MessageBoxResult.Yes)
-                {
-                    EditarProdutos(produtoSelecionado);
+                    if (resultado == MessageBoxResult.Yes)
+                    {
+                        EditarProdutos(produtoSelecionado);
+                    }
+                    else if (resultado == MessageBoxResult.No)
+                    {
+                        ListarProdutosComBuscar(produtoSelecionado);
+                    }
                 }
-                else if (resultado == MessageBoxResult.No)
+                else
                 {
-                    ListarProdutosComBuscar(produtoSelecionado);
+                    MessageBox.Show("Produto não encontrado!", "Produto não encontrado",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Produto não encontrado!", "Produto não encontrado",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            }            
         }
         private void btnSalvarProduto_Click(object sender, RoutedEventArgs e)
         {
@@ -159,32 +162,30 @@ namespace Gerenciador_de_Estoques_V2
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("O banco de dados parece estar inacessível.", "Erro ao salvar produto",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
         
         private void btnSalvarProdutoEditado_Click(object sender, RoutedEventArgs e)
         {
-            if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
+            if (SqlHandler.TestConnection() == true)
             {
-                produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
-                produtoSelecionado.Nome = txtNomeProduto.Text;
-                produtoSelecionado.Quantidade = int.Parse(txtQuantidadeProduto.Text);
-                produtoSelecionado.Preco = (decimal)double.Parse(txtPrecoProduto.Text);
+                if (txtNomeProduto.Text != "" && txtQuantidadeProduto.Text != "" && txtPrecoProduto.Text != "")
+                {
+                    produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
+                    produtoSelecionado.Nome = txtNomeProduto.Text;
+                    produtoSelecionado.Quantidade = int.Parse(txtQuantidadeProduto.Text);
+                    produtoSelecionado.Preco = (decimal)double.Parse(txtPrecoProduto.Text);
 
-                
-                ProdutoDAO.EditarProduto(produtoSelecionado);
-                CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);                
-            }
-            else
-            {
-                MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }    
-            ListarProdutos_Click(sender, e);
+
+                    ProdutoDAO.EditarProduto(produtoSelecionado);
+                    CleanFields(txtNomeProduto, txtQuantidadeProduto, txtPrecoProduto);
+                }
+                else
+                {
+                    MessageBox.Show("Preencha todos os campos!", "Preencha todos os campos",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                ListarProdutos_Click(sender, e);
+            }            
         }
 
         private void EditarProduto_Click(object sender, RoutedEventArgs e)
@@ -203,28 +204,31 @@ namespace Gerenciador_de_Estoques_V2
 
         private void ExcluirProduto_Click(object sender, RoutedEventArgs e)
         {
-            if (lvwProdutos.SelectedItem != null)
+            if (SqlHandler.TestConnection() == true)
             {
-                produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
-                produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
-
-                MessageBoxResult resultado = MessageBox.Show("Deseja excluir o produto " + produtoSelecionado.Nome
-                    + "?", "Excluir Produto", MessageBoxButton.YesNo);
-
-                if (resultado == MessageBoxResult.Yes)
+                if (lvwProdutos.SelectedItem != null)
                 {
-                    ProdutoDAO.RemoverProduto(produtoSelecionado);
-                    PreencherListView();
+                    produtoSelecionado = (Produto)lvwProdutos.SelectedItem;
+                    produtoSelecionado = ProdutoDAO.BuscarProduto(produtoSelecionado);
+
+                    MessageBoxResult resultado = MessageBox.Show("Deseja excluir o produto " + produtoSelecionado.Nome
+                        + "?", "Excluir Produto", MessageBoxButton.YesNo);
+
+                    if (resultado == MessageBoxResult.Yes)
+                    {
+                        ProdutoDAO.RemoverProduto(produtoSelecionado);
+                        PreencherListView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Operação cancelada!", "Excluir Produto");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Operação cancelada!", "Excluir Produto");
+                    MessageBox.Show("Selecione um produto para remover!");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Selecione um produto para remover!");
-            }
+            }            
         }
 
         private void DesejoFiltrar_Click(object sender, RoutedEventArgs e)

@@ -10,9 +10,7 @@ using MySql.Data.MySqlClient;
 namespace Sistema_de_Gerenciamento_de_Estoques.Infra.DAO
 {    
     public class ProdutoDAO
-    {
-        private static readonly string erroDeConexao = "Não foi possível se conectar a nenhum banco de dados MySql especificado.";                    
-
+    {                   
         public static List<Produto> ListarProdutos()
         {
                 List<Produto> produtos = new List<Produto>();
