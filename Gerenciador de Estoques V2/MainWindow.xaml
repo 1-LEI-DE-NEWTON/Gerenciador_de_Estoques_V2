@@ -233,7 +233,7 @@
             <Button x:Name="btnFiltrar" Background="#333" Cursor="Hand" FontWeight="Bold"
                     Click="Filtrar_Click" Height="20" Width="98" Margin="10,-74,-145,0" Visibility="Hidden">
 
-                <TextBlock Text="Listar Produtos" Margin="0,-3,0,0" Foreground="#fff"/>
+                <TextBlock Text="Listar com filtro" Margin="0,-3,0,0" Foreground="#fff"/>
 
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
