@@ -246,6 +246,12 @@
         </StackPanel>
 
         <ListView Grid.Row="2" x:Name="lvwProdutos" FontSize="18" Grid.ColumnSpan="2" Visibility="Hidden">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderThickness" Value="0 0 1 1"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nome" Width="400" DisplayMemberBinding="{Binding Nome}"/>
