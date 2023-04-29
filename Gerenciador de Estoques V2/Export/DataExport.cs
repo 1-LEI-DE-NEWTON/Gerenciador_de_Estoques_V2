@@ -1,5 +1,6 @@
-﻿using System.Diagnostics;
-using System.Windows.Forms;
+﻿using System;
+using System.Diagnostics;
+using System.Windows;
 
 namespace Gerenciador_de_Estoques_V2.Export
 {
@@ -10,31 +11,55 @@ namespace Gerenciador_de_Estoques_V2.Export
             string pythonPath = @"C:/Users/TKFir/AppData/Local/Microsoft/WindowsApps/python3.10.exe";
             string scriptPath = @"c:/Users/TKFir/source/repos/Gerenciador_de_Estoques_V2/Gerenciador de Estoques V2/Infra/conexaobd.py";
 
-            ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "cmd.exe";
-            start.Arguments = @"C:/Users/TKFir/AppData/Local/Microsoft/WindowsApps/python3.10.exe ""c:/Users/TKFir/source/repos/Gerenciador_de_Estoques_V2/Gerenciador de Estoques V2/Infra/conexaobd.py""";
-            start.UseShellExecute = false;
-            start.RedirectStandardOutput = true;
-
             string cmd = $"{pythonPath} \"{scriptPath}\"";
-            Process.Start("cmd.exe", $"/c {cmd}");
 
+            try
+            {
+                Process.Start("CMD.exe", $"/c {cmd}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
             string sourceFilePath = @"C:\Users\TKFir\source\repos\Gerenciador_de_Estoques_V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\produtos.xlsx";
-            string destFilePath = @"C:\Users\TKFir\source\repos\Gerenciador_de_Estoques_V2\Gerenciador de Estoques V2\Infra\produtos.xlsx";
+            string destFilePath = GetFolderPathFromUser();
 
-            // Move the file to the destination directory
-            System.IO.File.Move(sourceFilePath, destFilePath);
+            if (destFilePath != null)
+            {
+                string destFullPath = destFilePath + @"\produtos.xlsx";
+                
+                try
+                {                    
+                    System.IO.File.Move(sourceFilePath, destFullPath);
+
+                    MessageBoxResult resultado = MessageBox.Show("Arquivo exportado com sucesso! Gostaria de abri-lo?",
+                        "Arquivo exportado", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                    if (resultado == MessageBoxResult.Yes)
+                    {
+                        Process.Start(destFullPath);
+                    }                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nenhum diretório selecionado", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-        
-        /*
+                
         private static string GetFolderPathFromUser()
         {
-            using (var dialog = new FolderBrowserDialog())
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
                 dialog.Description = "Selecione a pasta para salvar o arquivo";
                 dialog.ShowNewFolderButton = true;
-                DialogResult result = dialog.ShowDialog();
-                if (result == DialogResult.OK)
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     return dialog.SelectedPath;
                 }
@@ -43,7 +68,6 @@ namespace Gerenciador_de_Estoques_V2.Export
                     return null;
                 }
             }
-        }
-        */
+        }        
     }    
 }

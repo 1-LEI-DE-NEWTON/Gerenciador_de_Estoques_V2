@@ -1,7 +1,7 @@
-import os
 import mysql.connector
 import pandas as pd
 import xlsxwriter
+import os
 
 cnx = mysql.connector.connect(user='root', password='',
                               host='localhost', port='3306', database='gerenciadordeestoque')
@@ -34,5 +34,10 @@ for i, col in enumerate(df.columns):
     worksheet.set_column(i, i, column_len)
 
 writer.save()
-os.system('start produtos.xlsx')
+#informa onde foi salvo
+
+print('Arquivo salvo em: ', os.getcwd())
 cnx.close()
+
+#Espera o usuario digitar algo para sair
+#input("Pressione qualquer tecla para sair...")
