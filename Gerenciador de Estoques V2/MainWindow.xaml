@@ -248,9 +248,15 @@
         <ListView Grid.Row="2" x:Name="lvwProdutos" FontSize="18" Grid.ColumnSpan="2" Visibility="Hidden">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nome" Width="200" DisplayMemberBinding="{Binding Nome}"/>
+                    <GridViewColumn Header="Nome" Width="400" DisplayMemberBinding="{Binding Nome}"/>
                     <GridViewColumn Header="Quantidade" Width="150" DisplayMemberBinding="{Binding Quantidade}"/>
-                    <GridViewColumn Header="Preço Unitário" Width="150" DisplayMemberBinding="{Binding Preco}"/>
+                    <GridViewColumn Header="Preço Unitário" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Preco, StringFormat=C}" TextAlignment="Center" Language="pt-BR"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Opções" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

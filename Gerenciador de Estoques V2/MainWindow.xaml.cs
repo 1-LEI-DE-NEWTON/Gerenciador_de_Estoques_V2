@@ -4,7 +4,9 @@ using GerenciadorDeEstoque.Filtros;
 using Sistema_de_Gerenciamento_de_Estoques.Infra.DAO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -41,6 +43,10 @@ namespace Gerenciador_de_Estoques_V2
 
         public MainWindow()
         {
+            CultureInfo cultureInfo = new CultureInfo("pt-BR");
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            
             InitializeComponent();
         }
 
@@ -70,8 +76,8 @@ namespace Gerenciador_de_Estoques_V2
         {
             SetVisibility(camposBemVindo, Visibility.Hidden);
             SetVisibility(camposAdicionarProduto, Visibility.Hidden);
-            SetVisibility(camposListarProduto, Visibility.Visible);
-            
+            SetVisibility(camposListarProduto, Visibility.Visible);                        
+
             PreencherListView();
         }
         
@@ -346,7 +352,7 @@ namespace Gerenciador_de_Estoques_V2
             if (SqlHandler.TestConnection() == true)
             {
                 Produtos = new ObservableCollection<Produto>(ProdutoDAO.ListarProdutos());
-                lvwProdutos.ItemsSource = Produtos;
+                lvwProdutos.ItemsSource = Produtos;                
             }
             else
             {
@@ -362,8 +368,8 @@ namespace Gerenciador_de_Estoques_V2
                 FrameworkElement elemento = FindName(campo) as FrameworkElement;
                 elemento?.Dispatcher.Invoke(() => elemento.Visibility = visibility);
             }
-        }
-
+        }        
+        
         private static void CleanFields(params TextBox[] campos)
         {
             foreach (TextBox campo in campos)
