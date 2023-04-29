@@ -22,28 +22,43 @@ namespace Gerenciador_de_Estoques_V2.Export
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
+            System.Threading.Thread.Sleep(2200);
+            
             string sourceFilePath = @"C:\Users\TKFir\source\repos\Gerenciador_de_Estoques_V2\Gerenciador de Estoques V2\bin\Debug\net6.0-windows\produtos.xlsx";
             string destFilePath = GetFolderPathFromUser();
 
             if (destFilePath != null)
             {
-                string destFullPath = destFilePath + @"\produtos.xlsx";
+                string destFullPath = destFilePath + @"\produtos.xlsx";                
                 
-                try
-                {                    
-                    System.IO.File.Move(sourceFilePath, destFullPath);
-
-                    MessageBoxResult resultado = MessageBox.Show("Arquivo exportado com sucesso! Gostaria de abri-lo?",
-                        "Arquivo exportado", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
+                if (System.IO.File.Exists(destFullPath))
+                {
+                    MessageBoxResult resultado = MessageBox.Show("Já existe um arquivo com o mesmo nome no diretório de destino." +
+                        " Gostaria de abri-lo?", "Arquivo já existente", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    
                     if (resultado == MessageBoxResult.Yes)
                     {
-                        Process.Start(destFullPath);
-                    }                    
+                        Process.Start(new ProcessStartInfo(destFullPath) { UseShellExecute = true });
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                    try
+                    {
+                        System.IO.File.Move(sourceFilePath, destFullPath);
+
+                        MessageBoxResult resultado = MessageBox.Show("Arquivo exportado com sucesso! Gostaria de abri-lo?",
+                            "Arquivo exportado", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                        if (resultado == MessageBoxResult.Yes)
+                        {
+                            Process.Start(new ProcessStartInfo(destFullPath) { UseShellExecute = true });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else
