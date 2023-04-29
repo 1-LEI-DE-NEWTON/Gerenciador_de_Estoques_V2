@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Gerenciador_de_Estoques_V2.Export;
 
 namespace Gerenciador_de_Estoques_V2
 {
@@ -344,6 +345,22 @@ namespace Gerenciador_de_Estoques_V2
             {
                 MessageBox.Show("Selecione um Filtro!");
             }            
+        }
+
+        private void ExportarParaExcel_Click(object sender, RoutedEventArgs e)
+        {
+            if (SqlHandler.TestConnection() == true)
+            {
+                if (ProdutoDAO.ListarProdutos().Count > 0)
+                {
+                   DataExport.ExportSqlDataToExcel();
+                }
+                else
+                {
+                    MessageBox.Show("Não há produtos para exportar!", "Exportar para Excel",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
         #endregion
 

@@ -91,6 +91,20 @@
             </Button.Resources>
         </Button>
 
+        <Button Name="btnExportarParaExcel" Margin="61,92,108,16"
+                Click="ExportarParaExcel_Click" FontSize="16"
+                Background="#333" FontWeight="Bold"
+                Padding="10" Cursor="Hand" Grid.Column="1">
+
+            <TextBlock Text="Exportar para Excel" Margin="0,-3,0,0" Foreground="#fff"/>
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
         <Border VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="18,11,0,0" Grid.Row="1" x:Name="borderWelcome" 
                 BorderBrush="#ddd" BorderThickness="1" CornerRadius="5" Height="48" Width="800"
                 HorizontalAlignment="Left" Visibility="Visible">
@@ -197,7 +211,7 @@
             <Label Content="Filtrar por:" x:Name="lblFiltrar"
                     FontFamily="roboto" FontSize="14" Foreground="#333" Visibility="Hidden"
                     RenderTransformOrigin="0.5,0.755" FontWeight="Bold" Margin="18,0,0,0"/>
-            
+
             <Button x:Name="btnDesejoFiltrar" Background="#333" Cursor="Hand" FontWeight="Bold"
                     Click="DesejoFiltrar_Click" Height="25" Width="168" Visibility="Hidden"
                     Margin="-680,1,0,0">

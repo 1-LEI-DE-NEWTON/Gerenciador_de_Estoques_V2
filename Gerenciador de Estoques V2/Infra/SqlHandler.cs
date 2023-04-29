@@ -24,6 +24,6 @@ namespace Gerenciador_de_Estoques_V2.Infra
                 MessageBox.Show(erroDeConexao, "Erro de conexão", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-        }
+        }        
     }
 }
