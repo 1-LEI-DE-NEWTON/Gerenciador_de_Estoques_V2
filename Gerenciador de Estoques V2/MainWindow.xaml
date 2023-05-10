@@ -94,7 +94,7 @@
         <Button Name="btnExportarParaExcel" Margin="61,92,108,16"
                 Click="ExportarParaExcel_Click" FontSize="16"
                 Background="#333" FontWeight="Bold"
-                Padding="10" Cursor="Hand" Grid.Column="1">
+                Padding="10" Cursor="Hand" Grid.Column="1" Visibility="Hidden">
 
             <TextBlock Text="Exportar para Excel" Margin="0,-3,0,0" Foreground="#fff"/>
 

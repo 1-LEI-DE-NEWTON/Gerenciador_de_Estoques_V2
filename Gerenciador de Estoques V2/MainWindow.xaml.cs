@@ -26,7 +26,7 @@ namespace Gerenciador_de_Estoques_V2
         private readonly List<string> camposBemVindo = new List<string> { "borderWelcome", "txtWelcome", "txtWelcome2" };
         
         private readonly List<string> camposListarProduto = new List<string> { "lblFiltrar", "cbxFiltro", "btnFiltrar",
-            "lvwProdutos", "btnDesejoFiltrar" };
+            "lvwProdutos", "btnDesejoFiltrar", "btnExportarParaExcel" };
 
         private readonly List<string> camposFiltrosListarProdutos = new List<string> { "txtFiltro", "txtMinimo", "txtMaximo" };
 
